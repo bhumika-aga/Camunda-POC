@@ -1,0 +1,176 @@
+{
+  "info": {
+    "_postman_id": "06fa7f34-798e-4af9-8adc-401a1656bd4c",
+    "name": "Camunda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43503371",
+    "_collection_link": "https://bhumikaagarwal.postman.co/workspace/Bhumika-Agarwal's-Workspace~95fe059d-ce1b-4716-8552-5fc960ee1c0b/collection/43503371-06fa7f34-798e-4af9-8adc-401a1656bd4c?action=share&source=collection_link&creator=43503371"
+  },
+  "item": [
+    {
+      "name": "Start Process",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"customerName\": \"Bhumika Agarwal\",\n    \"email\": \"bhumika@example.com\",\n    \"documentType\": \"PASSPORT\"\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/process/start",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "process",
+            "start"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Process Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/process/efe1c432-d104-11f0-ab3d-8e95b3886215/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "process",
+            "efe1c432-d104-11f0-ab3d-8e95b3886215",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List All Running Instances",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/process/instances",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "process",
+            "instances"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "All Pending Tasks",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/process/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "process",
+            "tasks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "All Tasks for Employee Groups",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/process/tasks?candidateGroup=employees",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "process",
+            "tasks"
+          ],
+          "query": [
+            {
+              "key": "candidateGroup",
+              "value": "employees"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Complete User Task",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"documentsApproved\": true,\n    \"reviewerComments\": \"All documents verified successfully\"\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/process/tasks/efed841e-d104-11f0-ab3d-8e95b3886215/complete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "process",
+            "tasks",
+            "efed841e-d104-11f0-ab3d-8e95b3886215",
+            "complete"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

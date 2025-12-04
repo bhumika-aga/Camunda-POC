@@ -1,0 +1,75 @@
+# =============================================================================
+# EXTERNAL WORKERS - APPLICATION CONFIGURATION
+# =============================================================================
+# Camunda External Task Client Configuration
+# These workers connect to the Camunda Engine REST API
+# =============================================================================
+
+spring:
+  application:
+    name: customer-onboarding-external-workers
+
+# =============================================================================
+# CAMUNDA EXTERNAL TASK CLIENT CONFIGURATION
+# =============================================================================
+camunda:
+  client:
+    # Base URL of the Camunda Engine REST API
+    base-url: http://localhost:8080/engine-rest
+
+    # Unique identifier for this worker instance
+    worker-id: external-worker-node-1
+
+    # Maximum number of tasks to fetch in one request
+    max-tasks: 10
+
+    # Lock duration in milliseconds (how long a task is locked for this worker)
+    lock-duration: 30000
+
+    # Long polling timeout in milliseconds
+    # Worker will wait this long for new tasks before re-polling
+    async-response-timeout: 20000
+
+    # Disable auto-fetching (we'll configure topics manually)
+    auto-fetching-enabled: true
+
+    # Default number of retries for failed tasks
+    default-retries: 3
+
+    # Retry timeout in milliseconds (delay before retry)
+    default-retry-timeout: 10000
+
+# =============================================================================
+# WORKER-SPECIFIC CONFIGURATION
+# =============================================================================
+worker:
+  validate-data:
+    topic: validateData
+    lock-duration: 30000
+    retries: 3
+    retry-timeout: 5000
+
+  create-account:
+    topic: createAccount
+    lock-duration: 30000
+    retries: 3
+    retry-timeout: 5000
+
+  handle-error:
+    topic: handleError
+    lock-duration: 10000
+    retries: 1
+    retry-timeout: 1000
+
+# =============================================================================
+# LOGGING CONFIGURATION
+# =============================================================================
+logging:
+  level:
+    root: INFO
+    com.example.workers: DEBUG
+    org.camunda.bpm.client: INFO
+    org.camunda.bpm.client.task: DEBUG
+
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

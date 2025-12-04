@@ -1,0 +1,114 @@
+# =============================================================================
+# CAMUNDA ENGINE - APPLICATION CONFIGURATION
+# =============================================================================
+# Spring Boot 3.x + Camunda 7.21+ Configuration
+# Local Development Setup with H2 In-Memory Database
+# =============================================================================
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# =============================================================================
+# SPRING CONFIGURATION
+# =============================================================================
+spring:
+  application:
+    name: customer-onboarding-camunda-engine
+
+  # H2 In-Memory Database Configuration
+  datasource:
+    url: jdbc:h2:mem:camunda;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # H2 Console (for debugging database)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+
+  # JPA/Hibernate Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+# =============================================================================
+# CAMUNDA BPM CONFIGURATION
+# =============================================================================
+camunda:
+  bpm:
+    # Admin user configuration (demo/demo for local development)
+    admin-user:
+      id: demo
+      password: demo
+      firstName: Demo
+      lastName: User
+      email: demo@example.com
+
+    # Default filter for Tasklist
+    filter:
+      create: All tasks
+
+    # Web applications path configuration
+    webapp:
+      application-path: /camunda
+      index-redirect-enabled: true
+
+    # Process engine configuration
+    generic-properties:
+      properties:
+        history: full
+        historyTimeToLive: P180D
+        enableExceptionsAfterUnhandledBpmnError: true
+
+    # Auto-deploy BPMN processes from resources/processes folder
+    deployment-resource-pattern: classpath*:processes/*.bpmn
+
+    # Authorization settings
+    authorization:
+      enabled: false
+
+    # Job executor configuration (for async tasks)
+    job-execution:
+      enabled: true
+      deployment-aware: true
+
+    # Database configuration
+    database:
+      schema-update: true
+      type: h2
+
+# =============================================================================
+# LOGGING CONFIGURATION
+# =============================================================================
+logging:
+  level:
+    root: INFO
+    com.example.camunda: DEBUG
+    org.camunda.bpm: INFO
+    org.camunda.bpm.engine.impl.persistence: WARN
+    org.camunda.bpm.engine.externaltask: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
+
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# =============================================================================
+# MANAGEMENT / ACTUATOR ENDPOINTS
+# =============================================================================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
