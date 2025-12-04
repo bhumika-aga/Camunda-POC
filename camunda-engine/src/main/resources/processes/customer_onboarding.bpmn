@@ -44,7 +44,7 @@
 
     <!-- ==================== USER TASK: REVIEW DOCUMENTS ==================== -->
     <bpmn:userTask id="Task_ReviewDocuments" name="Review Customer Documents"
-      camunda:candidateGroups="employees"
+      camunda:assignee="demo"
       camunda:formKey="embedded:app:forms/review-documents.html">
       <bpmn:extensionElements>
         <camunda:formData>
