@@ -1,0 +1,39 @@
+{
+  "type": "default",
+  "components": [
+    {
+      "key": "customerName",
+      "label": "Customer Name",
+      "type": "textfield",
+      "readonly": true
+    },
+    {
+      "key": "email",
+      "label": "Email",
+      "type": "textfield",
+      "readonly": true
+    },
+    {
+      "key": "documentType",
+      "label": "Document Type",
+      "type": "textfield",
+      "readonly": true
+    },
+    {
+      "key": "validationMessage",
+      "label": "Validation Result",
+      "type": "textfield",
+      "readonly": true
+    },
+    {
+      "key": "documentsApproved",
+      "label": "Approve Documents?",
+      "type": "checkbox"
+    },
+    {
+      "key": "reviewerComments",
+      "label": "Reviewer Comments",
+      "type": "textarea"
+    }
+  ]
+}

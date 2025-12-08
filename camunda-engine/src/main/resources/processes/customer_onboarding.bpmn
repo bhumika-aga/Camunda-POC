@@ -43,9 +43,9 @@
     </bpmn:boundaryEvent>
 
     <!-- ==================== USER TASK: REVIEW DOCUMENTS ==================== -->
-    <bpmn:userTask id="Task_ReviewDocuments" name="Review Customer Documents"
-      camunda:assignee="demo"
-      camunda:formKey="embedded:app:forms/review-documents.html">
+    <bpmn:userTask id="Task_ReviewDocuments"
+                   name="Review Customer Documents"
+                   camunda:assignee="demo">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="customerName" label="Customer Name" type="string">
